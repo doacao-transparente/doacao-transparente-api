@@ -94,21 +94,9 @@ module.exports = () => {
     let CREATEOBJECTS = (params, models) => {
         console.log('[REQ]CREATE:');
         console.log(params);
-
-        try {
-            var args = models.Company.map(company => {
-                return models.ONG.map(ong => {
-                    [
-                        company.Id, company.Name, company.CNPJ, company.Tokens,
-                        ong.Id.ong.Name.ong.CNPJ, ong.Tokens
-                    ]
-                })
-            });
-
-            console.log(args);
-        } catch (err) {
-            console.log(err);
-        }
+        console.log(models);
+        let args = argsMap(models);
+        console.log(args);
         return {
             method: 'POST',
             url: url + '/chaincode',
@@ -126,12 +114,32 @@ module.exports = () => {
                     },
                     "ctorMsg": {
                         "function": "initdemo",
-                        "args": args
+                        "args": [args]
                     },
                     "secureContext": params.secureContextId
                 },
                 "id": 1
             })
+        }
+    }
+
+    let argsMap = (models) => {
+
+        try {
+            var companies = models.Company.map(company => {
+                return [company.Id, company.Name, company.CNPJ, company.Tokens]
+            });
+            var ongs = models.ONG.map(ong => {
+                return [ong.Id, ong.Name, ong.CNPJ, ong.Tokens]
+            });
+
+            let companyString = companies.join(',');
+            let ongString = ongs.join(',');
+            let args = companyString.concat(ongString);
+
+            return args;
+        } catch (err) {
+            console.log(err);
         }
     }
 

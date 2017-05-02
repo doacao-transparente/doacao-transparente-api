@@ -64,15 +64,18 @@ module.exports = () => {
 
     let createObjects = (isReady, models) => {
         return new Promise((resolve, reject) => {
-            console.log(`[API] createObjects ${isReady} | ${models}`);
+            console.log(`[API] createObjects`);
             let options = req.createObjects(isReady, models);
             console.log(options);
             request(options)
                 .then((res) => {
-                    let finished = res.message ? true : false;
+                    let obj = JSON.parse(res);
+                    let finished = obj.result.status === 'OK' ? true : false;
+                    console.log(res);
                     resolve(finished);
                 })
                 .catch((err) => {
+                    console.log(err);
                     reject(err);
                 });
         });

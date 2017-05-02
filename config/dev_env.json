@@ -1,0 +1,65 @@
+{
+    "dev": true,
+    "peers": [{
+        "discovery_port": 7056,
+        "api_host": "192.168.1.49",
+        "api_port": 7055,
+        "api_port_tls": 7055,
+        "type": "peer",
+        "network_id": "dev",
+        "id": "jdoe",
+        "api_url": "192.168.1.49:7055"
+    }],
+    "ca": {
+        "discovery_port": 7056,
+        "api_host": "192.168.1.49",
+        "api_port_tls": 7056,
+        "api_port": 7056,
+        "type": "ca",
+        "network_id": "dev",
+        "url": "192.168.1.49:7056"
+    },
+    "users": [{
+            "enrollId": "bob",
+            "enrollSecret": "NOE63pEQbL25"
+        },
+        {
+            "enrollId": "test_user0",
+            "enrollSecret": "MS9qrN8hFjlE"
+        },
+        {
+            "enrollId": "test_user1",
+            "enrollSecret": "jGlNl6ImkuDo"
+        },
+        {
+            "enrollId": "test_user2",
+            "enrollSecret": "zMflqOKezFiA"
+        },
+        {
+            "enrollId": "test_user3",
+            "enrollSecret": "vWdLCE00vJy0"
+        },
+        {
+            "enrollId": "test_user4",
+            "enrollSecret": "nXSrfoYGFCP"
+        },
+        {
+            "enrollId": "test_user5",
+            "enrollSecret": "yg5DVhm0er1z"
+        },
+        {
+            "enrollId": "test_user6",
+            "enrollSecret": "b7pmSxzKNFiw"
+        },
+        {
+            "enrollId": "test_user7",
+            "enrollSecret": "YsWZD4qQmYxo"
+        },
+        {
+            "enrollId": "test_user8",
+            "enrollSecret": "W8G0usrU7jRk"
+        }
+    ],
+    "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
+    "chaincodepath": "./chaincodes/query.go"
+}

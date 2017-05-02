@@ -1,16 +1,26 @@
 {
-	"name": "NodejsStarterApp",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node app.js"
-	},
-	"dependencies": {
-		"express": "4.13.x",
-		"cfenv": "1.0.x"
-	},
-	"repository": {},
-	"engines": {
-		"node": "4.x"
-	} 
+  "name": "charity",
+  "version": "1.0.0",
+  "description": "NodeJS application for CHARITY Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "charity",
+    "IBM",
+    "Blockchain",
+    "Brazil"
+  ],
+  "author": "Vitor Diego , Cassio Rossi , Cássia #",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cfenv": "^1.0.x",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "promise": "^7.1.1",
+    "request": "^2.81.0"
+  }
 }

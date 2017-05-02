@@ -14,6 +14,8 @@ const url = protocol + "://" + host + ":" + port;
 module.exports = () => {
 
     let REGISTRAR = (params) => {
+        console.log('[REQ]REGISTRAR:');
+        console.log(params);
         return {
             method: 'POST',
             url: url + '/registrar',
@@ -29,6 +31,8 @@ module.exports = () => {
     }
 
     let DEPLOY = (params) => {
+        console.log('[REQ]DEPLOY:');
+        console.log(params);
         return {
             method: 'POST',
             url: url + '/chaincode',
@@ -47,10 +51,11 @@ module.exports = () => {
                     "ctorMsg": {
                         "function": "init",
                         "args": [
-                            params.args
+                            "99"
+                            //params.args
                         ]
                     },
-                    "secureContext": params.secureContextId
+                    "secureContext": params
                 },
                 "id": 1
             })
@@ -58,6 +63,8 @@ module.exports = () => {
     }
 
     let RESET = (params) => {
+        console.log('[REQ]RESET:');
+        console.log(params);
         return {
             method: 'POST',
             url: url + '/chaincode',
@@ -85,18 +92,23 @@ module.exports = () => {
     }
 
     let CREATEOBJECTS = (params, models) => {
+        console.log('[REQ]CREATE:');
+        console.log(params);
 
-        var args = models.Company.map(company => {
-            return models.ONG.map(ong => {
-                [
-                    company.Id, company.Name, company.CNPJ, company.Tokens,
-                    ong.Id.ong.Name.ong.CNPJ, ong.Tokens
-                ]
-            })
-        });
+        try {
+            var args = models.Company.map(company => {
+                return models.ONG.map(ong => {
+                    [
+                        company.Id, company.Name, company.CNPJ, company.Tokens,
+                        ong.Id.ong.Name.ong.CNPJ, ong.Tokens
+                    ]
+                })
+            });
 
-        console.log(args);
-
+            console.log(args);
+        } catch (err) {
+            console.log(err);
+        }
         return {
             method: 'POST',
             url: url + '/chaincode',

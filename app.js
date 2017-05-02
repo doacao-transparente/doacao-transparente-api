@@ -1,12 +1,12 @@
 'use strict'
 
 var app = require('./config/express')();
-var users = require('./config/bluemix_env').users;
+var env = require('./config/bluemix_env');
 var appStatusCode = require('./utils/ApplicationStatusCode');
 var appController = require("./controllers/appController")(app);
 
 try {
-    appController.setup(users)
+    appController.setup(env.users)
         .then((status) => {
             return status ?
                 appStatusCode.Success :

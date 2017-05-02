@@ -1,20 +1,25 @@
 'use strict'
 
-
 var req = require('../services/requestObjectService')();
 var Promise = require('promise');
-var request = require('request');
+var request = require('request-promise');
 
 module.exports = () => {
 
     let registrar = (users) => {
         return new Promise((resolve, reject) => {
+
             let options = req.registrar(users[8]);
+            console.log(options);
             request(options)
                 .then((isEnrolled) => {
-                    resolve(isEnrolled);
+                    console.log(`[API] Registrar`);
+                    console.log(isEnrolled);
+                    resolve(users[8].enrollId);
                 })
                 .catch((err) => {
+                    console.log(`[API] Registrar : ERROR`);
+                    console.log(err);
                     reject(err);
                 });
         });
@@ -22,7 +27,9 @@ module.exports = () => {
 
     let deploy = (secureContextId) => {
         return new Promise((resolve, reject) => {
+            console.log(`[API] deploy ${secureContextId}`);
             let options = req.deploy(secureContextId);
+            console.log(options);
             request(options)
                 .then((response) => {
 
@@ -42,7 +49,9 @@ module.exports = () => {
 
     let resetEverything = (isReady) => {
         return new Promise((resolve, reject) => {
+            console.log(`[API] resetEverything ${isReady}`);
             let options = req.reset(isReady);
+            console.log(options);
             request(options)
                 .then((res) => {
                     resolve(res);
@@ -55,7 +64,9 @@ module.exports = () => {
 
     let createObjects = (isReady, models) => {
         return new Promise((resolve, reject) => {
+            console.log(`[API] createObjects ${isReady} | ${models}`);
             let options = req.createObjects(isReady, models);
+            console.log(options);
             request(options)
                 .then((res) => {
                     let finished = res.message ? true : false;
@@ -66,5 +77,14 @@ module.exports = () => {
                 });
         });
     }
+
+    let objects = {
+        registrar: registrar,
+        deploy: deploy,
+        resetEverything: resetEverything,
+        createObjects: createObjects
+    }
+
+    return objects;
 
 }

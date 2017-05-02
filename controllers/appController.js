@@ -16,21 +16,21 @@ module.exports = (app) => {
              ****************************************************************************************/
             rest.registrar(users)
                 .then((secureContextId) => {
-
+                    console.log(`[APPCONTROLLER] Registrar${secureContextId}`);
                     /**********************************************************************************************************
                      *Param: {String} secureContextId - users's enrollmentId authorized to perform operations over network
                      *Returns: {Object} isReady - contains secureContext and chaincodeId 
                      **********************************************************************************************************/
                     rest.deploy(secureContextId)
                         .then((isReady) => {
-
+                            console.log(`[APPCONTROLLER] Deploy ${isReady}`);
                             /**********************************************************************************************************
                              *Param: {Object} isReady - contains secureContext and chaincodeId 
                              *Returns: {String} msg - currently status for network reset
                              **********************************************************************************************************/
                             rest.resetEverything(isReady)
                                 .then((msg) => {
-                                    console.log(msg);
+                                    console.log(`[APPCONTROLLER] resetEverything ${msg}`);
 
                                     /**********************************************************************************************************
                                      *Param: {Object} isReady - contains secureContext and chaincodeId 
@@ -39,6 +39,7 @@ module.exports = (app) => {
                                      **********************************************************************************************************/
                                     rest.createObjects(isReady, models)
                                         .then((finished) => {
+                                            console.log(`[APPCONTROLLER] createObjects ${finished}`);
                                             resolve(finished);
                                         })
                                         .catch((err) => {

@@ -13,7 +13,7 @@
     "Blockchain",
     "Brazil"
   ],
-  "author": "Vitor Diego , Cassio Rossi , Cássia #",
+  "author": "Vitor Diego , Cassio Rossi , Cássia Sanctos",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.1",

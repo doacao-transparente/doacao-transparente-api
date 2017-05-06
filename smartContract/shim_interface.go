@@ -7,6 +7,15 @@ import (
 	"github.com/vNext/fabric/core/chaincode/shim"
 )
 
+var projectsKey = "_projects"
+var projectsList []Project
+var ngoKey = "_ngo"
+var ngoList []NGO
+var donatorsKey = "_donators"
+var donatorsList []Donator
+var donationsKey = "_donations"
+var donationsList []Donation
+
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
 }
@@ -14,11 +23,11 @@ type SimpleChaincode struct {
 func main() {
 	err := shim.Start(new(SimpleChaincode))
 	if err != nil {
-		fmt.Printf("Error starting Simple chaincode - %s", err)
+		fmt.Printf("Error starting charity chaincode - %s", err)
 	}
 }
 
-func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) {
+func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("[Init]Chaincode Is Starting Up")
 	_, args := stub.GetFunctionAndParameters()
 	var Aval int
@@ -31,28 +40,24 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface) {
 	// convert numeric string to integer
 	Aval, err = strconv.Atoi(args[0])
 	if err != nil {
-		return shim.Error("Expecting a numeric string argument to Init()")
+		return err.Error("Expecting a numeric string argument to Init()")
 	}
 
-	// store compaitible marbles application version
 	err = stub.PutState("chaincodeVersion", []byte("1.0.0"))
 	if err != nil {
-		return shim.Error(err.Error())
+		return err.Error("Error writing chaincode version")
 	}
 
-	// this is a very simple dumb test.  let's write to the ledger and error on any errors
-	err = stub.PutState("initialValue", []byte(strconv.Itoa(Aval))) //making a test var "selftest", its handy to read this right away to test the network
+	err = stub.PutState("initialValue", []byte(strconv.Itoa(Aval)))
 	if err != nil {
-		return shim.Error(err.Error()) //self-test fail
+		return err.Error("Error writing initialValue - aborting...")
 	}
 
-	fmt.Println(" - ready for action") //self-test pass
-	return shim.Success(nil)
+	fmt.Println(" - ready for action")
+	return nil, nil
 }
 
-func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) {
-	function, args := stub.GetFunctionAndParameters()
-	fmt.Println(" ")
+func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("starting invoke, for - " + function)
 
 	if function == "init" {
@@ -70,12 +75,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) {
 	}
 
 	fmt.Println("Received unknown invoke function name - " + function)
-	return shim.Error("Received unknown invoke function name - '" + function + "'")
+	return err.Error("Received unknown invoke function name - '" + function + "'")
 }
 
-func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface) {
-	function, args := stub.GetFunctionAndParameters()
-	fmt.Println(" ")
+func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("starting query, for - " + function)
 
 	if function == "read" {

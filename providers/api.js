@@ -6,6 +6,26 @@ var request = require('request-promise');
 
 module.exports = () => {
 
+    let createProject = (project) => {
+        return new Promise((resolve, reject) => {
+
+            let options = req.createProject(project);
+            console.log(options);
+            request(options)
+                .then((isCreated) => {
+                    console.log(`[API] createProject`);
+                    console.log(isCreated);
+                    resolve(isCreated);
+                })
+                .catch((err) => {
+                    console.log(`[API] createProject : ERROR`);
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+
     let registrar = (users) => {
         return new Promise((resolve, reject) => {
 
@@ -85,7 +105,8 @@ module.exports = () => {
         registrar: registrar,
         deploy: deploy,
         resetEverything: resetEverything,
-        createObjects: createObjects
+        createObjects: createObjects,
+        createProject: createProject
     }
 
     return objects;

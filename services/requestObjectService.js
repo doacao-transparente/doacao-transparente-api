@@ -13,6 +13,35 @@ const url = protocol + "://" + host + ":" + port;
  ***************************************************************/
 module.exports = () => {
 
+    let CREATEPROJECT = (params) => {
+        console.log('[REQ]CREATEPROJECT:');
+        console.log(params);
+        return {
+            method: 'POST',
+            url: url + '/ ',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "jsonrpc": "2.0",
+                method: "invoke",
+                params: {
+                    "type": 1,
+                    "chaincodeID": {
+                        "name": params.chaincodeId
+                    },
+                    "ctorMsg": {
+                        "function": "create_project",
+                        "args": params.project
+                    },
+                    "secureContext": params.secureContextId
+                },
+                "id": 1
+            })
+        }
+    }
+
     let REGISTRAR = (params) => {
         console.log('[REQ]REGISTRAR:');
         console.log(params);
@@ -147,7 +176,8 @@ module.exports = () => {
         registrar: REGISTRAR,
         deploy: DEPLOY,
         reset: RESET,
-        createObjects: CREATEOBJECTS
+        createObjects: CREATEOBJECTS,
+        createProject: CREATEPROJECT
     }
     return methods;
 

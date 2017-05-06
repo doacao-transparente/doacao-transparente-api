@@ -9,7 +9,7 @@ import (
 )
 
 var projectsKey = "_projects"
-var projectsList []Project
+var projectsList []*Project
 var ngoKey = "_ngo"
 var ngoList []NGO
 var donatorsKey = "_donators"
@@ -84,6 +84,8 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 		return t.getDonationsHistory(stub, args)
 	} else if function == "getProjectsByRange" {
 		return t.getProjectsByRange(stub, args)
+	} else if function == "queryOverKeys" {
+		return t.queryOverKeys(stub, args)
 	}
 
 	return nil, errors.New("Query function not found")

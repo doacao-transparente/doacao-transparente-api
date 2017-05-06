@@ -31,7 +31,7 @@ type CourtOfAuditors struct {
 }
 
 type Project struct {
-	NGO              NGO        `json:"NGO"`
+	NGO              *NGO       `json:"NGO"`
 	Prefecture       Prefecture `json:"prefecture"`
 	Title            string     `json:"title"`
 	IdProject        int32      `json:"idProject"`

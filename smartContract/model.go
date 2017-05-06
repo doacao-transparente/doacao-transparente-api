@@ -1,38 +1,45 @@
 package main
 
-type ONG struct {
-	IdOng    int32     `json:"idOng"`
-	OngNome  string    `json:"ongNome"`
-	Projetos []Projeto `json:"projetos"`
+type NGO struct {
+	IdNGO    int32     `json:"idNgo"`
+	NGOName  string    `json:"NgoName"`
+	Projects []Project `json:"projects"`
 }
 
-type Doacao struct {
-	IdDoacao int32   `json:"idDoacao"`
-	Doador   int32   `json:"idDoador"`
-	Valor    float64 `json:"valor"`
+type Donation struct {
+	IdDonation int32   `json:"IdDonation"`
+	Donator    int32   `json:"idDonator"`
+	Value      float64 `json:"value"`
 }
 
-type Doador struct {
-	IdDoador int32    `json:"idDoador"`
-	DoadorId string   `json:"doadorId"`
-	Doacoes  []Doacao `json:"doacoes"`
+type Donator struct {
+	IdDonator   int32      `json:"idDonator"`
+	DonatorName string     `json:"donatorName"`
+	Donations   []Donation `json:"donations"`
 }
 
-type Prefeitura struct {
-	idPrefeitura   int32  `json:"idPrefeitura"`
-	PrefeituraNome string `json:"nomePrefeitura"`
+type Prefecture struct {
+	IdPrefecture   int32  `json:"idPrefecture"`
+	PrefectureName string `json:"prefectureName"`
 }
 
-type Projeto struct {
-	Ong              ONG        `json:"ong"`
-	Prefeitura       Prefeitura `json:"prefeitura"`
-	Titulo           string     `json:titulo`
-	IdProjeto        int32      `json:idProjeto`
-	Descricao        string     `json:"descricao"`
-	Custo            float64    `json:"custo"`
+type CourtOfAuditors struct {
+	//if false the court of auditors belongs to municipal area
+	IsState   bool   `json:"isState"`
+	IdCourt   int32  `json:"idcourt"`
+	StateName string `json:"statename"`
+}
+
+type Project struct {
+	NGO              NGO        `json:"NGO"`
+	Prefecture       Prefecture `json:"prefecture"`
+	Title            string     `json:"title"`
+	IdProject        int32      `json:"idProject"`
+	Description      string     `json:"description"`
+	Cost             float64    `json:"cost"`
 	Status           bool       `json:"status"`
-	StatusHistorico  []string   `json:"statusHostorico"`
-	ValorArrecadado  float64    `json:"valorArrecadado"`
-	DoacoesHistorico []Doacao   `json:"historicoDoacoes"`
-	ValorRepassado   float64    `json:valorRepassado`
+	StatusHistory    []string   `json:"statusHistory"`
+	AmountCollected  float64    `json:"amountCollected"`
+	DonationsHistory []Donation `json:"donationsHistory"`
+	ValueTransfered  float64    `json:"valueTransfered"`
 }

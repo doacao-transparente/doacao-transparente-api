@@ -49,10 +49,10 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 
 	err = stub.PutState("initialValue", []byte(strconv.Itoa(Aval)))
 	if err != nil {
-		return nil, errors.New("Error writing initialValue - aborting...")
+		return nil, errors.New("Error writing initialValue - aborting")
 	}
 
-	fmt.Println(" - ready for action")
+	//t.createScenario(stub)
 	return nil, nil
 }
 
@@ -64,12 +64,12 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.Init(stub, function, args)
 	} else if function == "createProject" {
 		return t.createProject(stub, args)
-	} else if function == "updateProject" {
-		return t.updateProject(stub, args)
-	} else if function == "sendDonation" {
-		return t.sendDonation(stub, args)
-	} else if function == "transferDonation" {
-		return t.transferDonation(stub, args)
+	} else if function == "setStatusProject" {
+		return t.setStatusProject(stub, args)
+	} else if function == "setAmount" {
+		return t.setAmount(stub, args)
+	} else if function == "setValueTransfered" {
+		return t.setValueTransfered(stub, args)
 	}
 
 	fmt.Println("Received unknown invoke function name - " + function)

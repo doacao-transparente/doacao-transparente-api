@@ -72,10 +72,6 @@ func (t *SimpleChaincode) getProjectsByRange(stub shim.ChaincodeStubInterface, a
 	return projectsAsBytes, nil
 }
 
-func (t *SimpleChaincode) updateProject(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	return nil, nil
-}
-
 func (t *SimpleChaincode) queryOverKeys(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var arguments, jsonResp string
 	var err error
@@ -96,17 +92,121 @@ func (t *SimpleChaincode) queryOverKeys(stub shim.ChaincodeStubInterface, args [
 		return nil, errors.New(jsonResp)
 	}
 
-	return valAsbytes, nil //send it onward
+	return valAsbytes, nil
 }
 
-func (t *SimpleChaincode) sendDonation(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	return nil, nil
+//createScenario
+/* args[0] - ONGS
+ * args[1] - City Hall's
+ * args[2] - Projects
+ */
+func (t *SimpleChaincode) createScenario(stub shim.ChaincodeStubInterface) error {
+	return nil
+}
+
+func (t *SimpleChaincode) setStatusProject(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	projectID, err := strconv.Atoi(args[0])
+	var statusProject = args[1]
+
+	allProjectsAsBytes, err := stub.GetState(projectsKey)
+	if err != nil {
+		return nil, errors.New("Failed to retrieve projects list")
+	}
+
+	json.Unmarshal(allProjectsAsBytes, &projectsList)
+	for x := range projectsList {
+
+		fmt.Println("Searching for projectID " + strconv.Itoa(projectID))
+		if projectsList[x].IdProject == projectID {
+			fmt.Println("Project " + strconv.Itoa(projectID) + " found")
+			projectsList[x].Status = statusProject
+			projectsList[x].StatusHistory = append(projectsList[x].StatusHistory, statusProject)
+			fmt.Println("Currently Status: " + projectsList[x].Status)
+
+			allProjectsAsBytes, _ = json.Marshal(projectsList)
+			err = stub.PutState(projectsKey, allProjectsAsBytes)
+			if err != nil {
+				return nil, err
+			}
+
+			fmt.Print("Project Status Updated")
+			return []byte(statusProject), nil
+		}
+	}
+
+	return nil, errors.New("Project not found")
+}
+
+func (t *SimpleChaincode) setAmount(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	projectID, err := strconv.Atoi(args[0])
+	donation, err := strconv.ParseFloat(args[1], 64)
+	if err != nil {
+		return nil, errors.New("Error parsing donation value")
+	}
+
+	allProjectsAsBytes, err := stub.GetState(projectsKey)
+	if err != nil {
+		return nil, errors.New("Failed to retrieve projects list")
+	}
+
+	json.Unmarshal(allProjectsAsBytes, &projectsList)
+	for x := range projectsList {
+
+		fmt.Println("Searching for projectID " + strconv.Itoa(projectID))
+		if projectsList[x].IdProject == projectID {
+			fmt.Println("Project " + strconv.Itoa(projectID) + " found")
+			projectsList[x].AmountCollected += donation
+			fmt.Println("Currently AmountCollected: " + strconv.FormatFloat(projectsList[x].AmountCollected, 'f', -1, 64))
+
+			allProjectsAsBytes, _ = json.Marshal(projectsList)
+			err = stub.PutState(projectsKey, allProjectsAsBytes)
+			if err != nil {
+				return nil, err
+			}
+
+			fmt.Print("Donation Received Succesfully")
+			return nil, nil
+		}
+	}
+
+	return nil, errors.New("Error Receiveing Donation")
+}
+
+func (t *SimpleChaincode) setValueTransfered(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+
+	projectID, err := strconv.Atoi(args[0])
+	if err != nil {
+		return nil, errors.New("Error project ID")
+	}
+
+	allProjectsAsBytes, err := stub.GetState(projectsKey)
+	if err != nil {
+		return nil, errors.New("Failed to retrieve projects list")
+	}
+
+	json.Unmarshal(allProjectsAsBytes, &projectsList)
+	for x := range projectsList {
+
+		fmt.Println("Searching for projectID " + strconv.Itoa(projectID))
+		if projectsList[x].IdProject == projectID {
+			fmt.Println("Project " + strconv.Itoa(projectID) + " found")
+			projectsList[x].ValueTransfered += projectsList[x].AmountCollected
+			fmt.Println("Currently AmountCollected: " + strconv.FormatFloat(projectsList[x].ValueTransfered, 'f', -1, 64))
+
+			allProjectsAsBytes, _ = json.Marshal(projectsList)
+			err = stub.PutState(projectsKey, allProjectsAsBytes)
+			if err != nil {
+				return nil, err
+			}
+
+			fmt.Print("Donation Received Succesfully")
+			return nil, nil
+		}
+	}
+
+	return nil, errors.New("Error Receiveing Donation")
 }
 
 func (t *SimpleChaincode) getDonationsHistory(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	return nil, nil
-}
-
-func (t *SimpleChaincode) transferDonation(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	return nil, nil
 }

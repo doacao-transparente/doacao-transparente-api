@@ -3,8 +3,8 @@ applications:
   memory: 256M
   instances: 1
   domain: mybluemix.net
-  name: CHARITY
-  host: ibmcharity
+  name: NGO Donation Manager
+  host: ngo-donation-manager
   timeout: 100
   disk_quota: 1024M
   services:

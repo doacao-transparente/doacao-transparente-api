@@ -8,7 +8,7 @@ let app = express();
 
 module.exports = () => {
 
-    app.set('views', __dirname + '/../views');
+    app.set('views', __dirname + '/../views/donation/www');
     app.set('view engine', 'ejs');
     app.engine('html', require('ejs').renderFile);
 
@@ -18,7 +18,7 @@ module.exports = () => {
         extended: true
     }));
 
-    app.get('/', (req, res) => res.redirect('/welcome'));
+    app.get('/', (req, res) => res.redirect('/home'));
 
     app.get('/welcome', function (req, res) {
         res.render('welcome.html');

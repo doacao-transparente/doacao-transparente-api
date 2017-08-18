@@ -1,6 +1,6 @@
 
 var app = require('./config/express')();
-/*var env = require('./config/bluemix_env');
+var env = require('./config/bluemix_env');
 var appStatusCode = require('./utils/ApplicationStatusCode');
 var appController = require("./controllers/appController")(app);
 
@@ -15,4 +15,4 @@ try {
         });
 } catch (error) {
     console.error(error);
-}*/
+}

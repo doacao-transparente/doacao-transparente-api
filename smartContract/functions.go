@@ -247,7 +247,7 @@ func (t *SimpleChaincode) getDonatorsHistory(stub shim.ChaincodeStubInterface, a
 	donatorID := args
 	projectAsByte, err := stub.GetState(projectsKey)
 	var listProject []Project
-	err2 := json.Unmarshal(projectAsByte, &,,,,,,,,00)
+	err2 := json.Unmarshal(projectAsByte, &listProject)
 	if err2 == nil {
 		return nil, errors.New("Failed to retrieve projects list project")
 	}

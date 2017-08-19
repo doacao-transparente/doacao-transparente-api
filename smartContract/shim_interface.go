@@ -79,11 +79,11 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Println("starting query, for - " + function)
 	switch function {
 	case "getDonationsHistory":
-		return t.getDonationsHistory(stub, args)
+		return t.getDonationsHistory(stub, args[0])
 	case "getProjectsByRange":
 		return t.getProjectsByRange(stub, args)
 	case "queryOverKeys":
-		return t.queryOverKeys(stub, args)
+		return t.queryOverKeys(stub, args[0])
 	}
 	return nil, errors.New("Query function not found")
 }

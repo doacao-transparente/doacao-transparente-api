@@ -12,7 +12,7 @@ module.exports = () => {
     let createProject = (project) => {
         return new Promise((resolve, reject) => {
             let x = {
-                project: project,
+                project: project.body,
                 secureContextId: secureContextIdGlobal,
                 chaincodeId: chaincodeIdGlobal
             };

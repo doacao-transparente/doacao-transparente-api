@@ -1,4 +1,5 @@
 {
+  "dev": false,
   "peers": [
     {
       "discovery_host": "d169eb482e1f43c38fe579b83da9e68f-vp0.us.blockchain.ibm.com",
@@ -227,5 +228,6 @@
     }
   ],
   "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
+  "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/global",
   "cert_path": "/certs/peer/cert.pem"
 }

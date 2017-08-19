@@ -1,8 +1,8 @@
 'use strict'
 
 var req = require('../services/requestObjectService')();
-var Promise = require('promise');
 var request = require('request-promise');
+var Promise = require('promise');
 
 module.exports = () => {
 
@@ -14,12 +14,10 @@ module.exports = () => {
             request(options)
                 .then((isCreated) => {
                     console.log(`[API] createProject`);
-                    console.log(isCreated);
                     resolve(isCreated);
                 })
                 .catch((err) => {
                     console.log(`[API] createProject : ERROR`);
-                    console.log(err);
                     reject(err);
                 });
         });
@@ -54,14 +52,19 @@ module.exports = () => {
                 .then((response) => {
 
                     let id = JSON.parse(response);
+                    console.log('deploy request');
+                    console.log(response);
                     let chaincodeId = id.result.message;
                     let isReady = {
                         chaincodeId: chaincodeId,
                         secureContextId: secureContextId
                     }
+                    console.log('deployed');
                     resolve(isReady);
                 })
                 .catch((err) => {
+                    console.log('Error deploying chaincode');
+                    console.log(err);
                     reject(err);
                 });
         });

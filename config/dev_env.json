@@ -1,25 +1,28 @@
 {
     "dev": true,
-    "peers": [{
-        "discovery_port": 7056,
-        "api_host": "192.168.1.49",
-        "api_port": 7055,
-        "api_port_tls": 7055,
-        "type": "peer",
-        "network_id": "dev",
-        "id": "jdoe",
-        "api_url": "192.168.1.49:7055"
-    }],
+    "peers": [
+        {
+            "discovery_port": 7055,
+            "api_host": "9.232.18.31",
+            "api_port": 7050,
+            "api_port_tls": 7050,
+            "type": "peer",
+            "network_id": "dev",
+            "id": "jdoe",
+            "api_url": "9.232.18.31:7050"
+        }
+    ],
     "ca": {
-        "discovery_port": 7056,
-        "api_host": "192.168.1.49",
-        "api_port_tls": 7056,
-        "api_port": 7056,
+        "discovery_port": 7055,
+        "api_host": "9.232.18.31",
+        "api_port_tls": 7055,
+        "api_port": 7055,
         "type": "ca",
         "network_id": "dev",
-        "url": "192.168.1.49:7056"
+        "url": "9.232.18.31:7055"
     },
-    "users": [{
+    "users": [
+        {
             "enrollId": "bob",
             "enrollSecret": "NOE63pEQbL25"
         },
@@ -61,5 +64,5 @@
         }
     ],
     "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
-    "chaincodepath": "./chaincodes/query.go"
+    "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/global"
 }

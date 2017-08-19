@@ -1,6 +1,6 @@
 'use strict'
 
-var env = require('../config/bluemix_env.json');
+var env = require('../config/dev_env.json');
 var host = env.peers[0].api_host;
 var port = env.peers[0].api_port;
 var protocol = env.dev ? 'http' : 'https';

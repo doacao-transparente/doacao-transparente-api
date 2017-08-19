@@ -1,10 +1,11 @@
-
-var app = require('./config/express')();
-var env = require('./config/bluemix_env');
+var app = require('./config/routerSetup')();
+var env = require('./config/dev_env');
+var router = require('./routes/apiRouter');
+var appController = require("./controllers/appController")();
 var appStatusCode = require('./utils/ApplicationStatusCode');
-var appController = require("./controllers/appController")(app);
 
 try {
+    router.config(app);
     appController.setup(env.users)
         .then((status) => {
             return status ?

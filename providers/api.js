@@ -10,7 +10,6 @@ module.exports = () => {
         return new Promise((resolve, reject) => {
 
             let options = req.createProject(project);
-            console.log(options);
             request(options)
                 .then((isCreated) => {
                     console.log(`[API] createProject`);

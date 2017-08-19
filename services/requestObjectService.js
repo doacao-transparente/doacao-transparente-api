@@ -15,7 +15,7 @@ module.exports = () => {
 
     let CREATEPROJECT = (params) => {
         console.log('[REQ]CREATEPROJECT:');
-        console.log(params);
+        console.log(params.project);
         return {
             method: 'POST',
             url: url + '/ ',

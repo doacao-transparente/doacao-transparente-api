@@ -1,5 +1,5 @@
 var app = require('./config/routerSetup')();
-var env = require('./config/dev_env');
+var env = require('./config/bluemix_env');
 var router = require('./routes/apiRouter');
 var appController = require("./controllers/appController")();
 var appStatusCode = require('./utils/ApplicationStatusCode');

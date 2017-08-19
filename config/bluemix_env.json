@@ -1,5 +1,4 @@
 {
-  "dev": false,
   "peers": [
     {
       "discovery_host": "d169eb482e1f43c38fe579b83da9e68f-vp0.us.blockchain.ibm.com",

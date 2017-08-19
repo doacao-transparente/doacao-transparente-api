@@ -20,6 +20,7 @@ module.exports = () => {
                 .then((msg) => {
                     console.log(`[APPCONTROLLER] createProject${msg}`);
                 }).catch((err) => {
+                    console.log(err);
                     reject(err);
                 });
         });
@@ -47,27 +48,27 @@ module.exports = () => {
                              *Param: {Object} isReady - contains secureContext and chaincodeId 
                              *Returns: {String} msg - currently status for network reset
                              **********************************************************************************************************/
-                            rest.resetEverything(isReady)
-                                .then((msg) => {
-                                    console.log(`[APPCONTROLLER] resetEverything ${msg}`);
+                            // rest.resetEverything(isReady)
+                            //     .then((msg) => {
+                            //         console.log(`[APPCONTROLLER] resetEverything ${msg}`);
 
-                                    /**********************************************************************************************************
-                                     *Param: {Object} isReady - contains secureContext and chaincodeId 
-                                     *Param: {Object} model - Model attributes for each participant
-                                     *Returns: {Bool} finished - final status for network setup
-                                     **********************************************************************************************************/
-                                    // rest.createObjects(isReady, models)
-                                    //     .then((finished) => {
-                                    //         console.log(`[APPCONTROLLER] createObjects ${finished}`);
-                                    //         resolve(finished);
-                                    //     })
-                                    //     .catch((err) => {
-                                    //         reject(err);
-                                    //     });
+                            /**********************************************************************************************************
+                             *Param: {Object} isReady - contains secureContext and chaincodeId 
+                             *Param: {Object} model - Model attributes for each participant
+                             *Returns: {Bool} finished - final status for network setup
+                             **********************************************************************************************************/
+                            // rest.createObjects(isReady, models)
+                            //     .then((finished) => {
+                            //         console.log(`[APPCONTROLLER] createObjects ${finished}`);
+                            //         resolve(finished);
+                            //     })
+                            //     .catch((err) => {
+                            //         reject(err);
+                            //     });
 
-                                }).catch((err) => {
-                                    reject(err);
-                                });
+                            // }).catch((err) => {
+                            //     reject(err);
+                            // });
 
                         })
                         .catch((err) => {

@@ -2,7 +2,7 @@
     "dev": true,
     "peers": [
         {
-            "discovery_port": 7055,
+            "discovery_port": 7051,
             "api_host": "9.232.18.31",
             "api_port": 7050,
             "api_port_tls": 7050,
@@ -13,13 +13,13 @@
         }
     ],
     "ca": {
-        "discovery_port": 7055,
+        "discovery_port": 7050,
         "api_host": "9.232.18.31",
-        "api_port_tls": 7055,
-        "api_port": 7055,
+        "api_port_tls": 7051,
+        "api_port": 7051,
         "type": "ca",
         "network_id": "dev",
-        "url": "9.232.18.31:7055"
+        "url": "9.232.18.31:7050"
     },
     "users": [
         {
@@ -64,5 +64,5 @@
         }
     ],
     "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
-    "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/bluehack"
+    "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/global"
 }

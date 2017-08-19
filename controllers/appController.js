@@ -7,7 +7,7 @@ var Promise = require('promise');
 var secureContextIdGlobal;
 var chaincodeIdGlobal;
 
-module.exports = (app) => {
+module.exports = () => {
 
     let createProject = (project) => {
         return new Promise((resolve, reject) => {
@@ -56,14 +56,14 @@ module.exports = (app) => {
                                      *Param: {Object} model - Model attributes for each participant
                                      *Returns: {Bool} finished - final status for network setup
                                      **********************************************************************************************************/
-                                    rest.createObjects(isReady, models)
-                                        .then((finished) => {
-                                            console.log(`[APPCONTROLLER] createObjects ${finished}`);
-                                            resolve(finished);
-                                        })
-                                        .catch((err) => {
-                                            reject(err);
-                                        });
+                                    // rest.createObjects(isReady, models)
+                                    //     .then((finished) => {
+                                    //         console.log(`[APPCONTROLLER] createObjects ${finished}`);
+                                    //         resolve(finished);
+                                    //     })
+                                    //     .catch((err) => {
+                                    //         reject(err);
+                                    //     });
 
                                 }).catch((err) => {
                                     reject(err);

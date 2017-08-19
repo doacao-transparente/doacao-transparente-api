@@ -1,8 +1,8 @@
 'use strict'
 
 var req = require('../services/requestObjectService')();
-var Promise = require('promise');
 var request = require('request-promise');
+var Promise = require('promise');
 
 module.exports = () => {
 
@@ -14,12 +14,10 @@ module.exports = () => {
             request(options)
                 .then((isCreated) => {
                     console.log(`[API] createProject`);
-                    console.log(isCreated);
                     resolve(isCreated);
                 })
                 .catch((err) => {
                     console.log(`[API] createProject : ERROR`);
-                    console.log(err);
                     reject(err);
                 });
         });

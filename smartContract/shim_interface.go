@@ -8,14 +8,16 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
-var projectsKey = "_projects"
-var projectsList []*Project
-var ngoKey = "_ngo"
-var ngoList []NGO
-var donatorsKey = "_donators"
-var donatorsList []Donator
-var donationsKey = "_donations"
-var donationsList []Donation
+var (
+	projectsKey   = "_projects"
+	projectsList  []*Project
+	ngoKey        = "_ngo"
+	ngoList       []NGO
+	donatorsKey   = "_donators"
+	donatorsList  []Donator
+	donationsKey  = "_donations"
+	donationsList []Donation
+)
 
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
@@ -31,27 +33,22 @@ func main() {
 //Init - makes go lang happy :)
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("[Init]Chaincode Is Starting Up")
-
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
-
 	// convert numeric string to integer
 	Aval, err := strconv.Atoi(args[0])
 	if err != nil {
 		return nil, errors.New("Expecting a numeric string argument to Init")
 	}
-
 	err = stub.PutState("chaincodeVersion", []byte("1.0.0"))
 	if err != nil {
 		return nil, errors.New("Error writing chaincode version")
 	}
-
 	err = stub.PutState("initialValue", []byte(strconv.Itoa(Aval)))
 	if err != nil {
 		return nil, errors.New("Error writing initialValue - aborting")
 	}
-
 	//t.createScenario(stub)
 	return nil, nil
 }
@@ -60,15 +57,16 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("starting invoke, for - " + function)
 
-	if function == "init" {
+	switch function {
+	case "init":
 		return t.Init(stub, function, args)
-	} else if function == "createProject" {
+	case "createProject":
 		return t.createProject(stub, args)
-	} else if function == "setStatusProject" {
+	case "setStatusProject":
 		return t.setStatusProject(stub, args)
-	} else if function == "setAmount" {
+	case "setAmount":
 		return t.setAmount(stub, args)
-	} else if function == "setValueTransfered" {
+	case "setValueTransfered":
 		return t.setValueTransfered(stub, args)
 	}
 
@@ -79,14 +77,13 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 //Query - makes go lang happy :)
 func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("starting query, for - " + function)
-
-	if function == "getDonationsHistory" {
+	switch function {
+	case "getDonationsHistory":
 		return t.getDonationsHistory(stub, args)
-	} else if function == "getProjectsByRange" {
+	case "getProjectsByRange":
 		return t.getProjectsByRange(stub, args)
-	} else if function == "queryOverKeys" {
+	case "queryOverKeys":
 		return t.queryOverKeys(stub, args)
 	}
-
 	return nil, errors.New("Query function not found")
 }

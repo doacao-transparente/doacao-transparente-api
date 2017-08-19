@@ -8,14 +8,15 @@ type NGO struct {
 
 type Donation struct {
 	IdDonation int     `json:"IdDonation"`
-	Donator    int     `json:"idDonator"`
 	Value      float64 `json:"value"`
+	Donator    Donator
 }
 
 type Donator struct {
-	IdDonator   int        `json:"idDonator"`
-	DonatorName string     `json:"donatorName"`
-	Donations   []Donation `json:"donations"`
+	IdDonator   int    `json:"idDonator"`
+	DonatorName string `json:"donatorName"`
+	//Donations   []Donation `json:"donations"`
+	TypeDonator string `json:"typedonator"`
 }
 
 type CityHall struct {

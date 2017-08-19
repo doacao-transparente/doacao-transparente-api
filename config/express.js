@@ -20,10 +20,6 @@ module.exports = () => {
 
     app.get('/', (req, res) => res.redirect('/home'));
 
-    app.get('/welcome', function (req, res) {
-        res.render('welcome.html');
-    });
-
     // get the app environment from Cloud Foundry
     //var appEnv = cfenv.getAppEnv(); / appEnv.port
 

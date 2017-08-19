@@ -227,5 +227,6 @@
     }
   ],
   "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
+  "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/bluehack",
   "cert_path": "/certs/peer/cert.pem"
 }

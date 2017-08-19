@@ -57,7 +57,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 }
 
 //Invoke - makes go lang happy :)
-func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (t *SimpleChaincode) Invoke(  shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	fmt.Println("starting invoke, for - " + function)
 
 	if function == "init" {

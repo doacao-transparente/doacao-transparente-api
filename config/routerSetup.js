@@ -1,4 +1,3 @@
-
 /*Express basic configuration as module */
 var appController = require("../controllers/appController");
 module.exports = function () {

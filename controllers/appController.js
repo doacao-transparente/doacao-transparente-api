@@ -34,8 +34,9 @@ exports.setAmount = (req, res) => {
 }
 
 exports.getDonationsHistory = (req, res) => {
-
-    rest.getDonationsHistory(req.params.id)
+    console.log('getting donations');
+    console.log(req.body);
+    rest.getDonationsHistory(req.body.id)
         .then((success) => {
             console.log("[APPCONTROLLER] getDonationsHistory");
             console.log(success);

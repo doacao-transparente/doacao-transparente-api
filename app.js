@@ -1,11 +1,11 @@
 var env = require('./config/dev_env');
 var appSetup = require("./utils/setup");
-var router = require('./routes/apiRouter');
+// var router = require('./routes/apiRouter');
 var app = require('./config/routerSetup')();
 var appStatusCode = require('./utils/ApplicationStatusCode');
 
 try {
-    router.config(app);
+    //router(app);
     appSetup.load(env)
         .then((status) => {
             return status ?

@@ -1,12 +1,12 @@
-var app = require('./config/routerSetup')();
-var env = require('./config/bluemix_env');
+var env = require('./config/dev_env');
+var appSetup = require("./utils/setup");
 var router = require('./routes/apiRouter');
-var appController = require("./controllers/appController")();
+var app = require('./config/routerSetup')();
 var appStatusCode = require('./utils/ApplicationStatusCode');
 
 try {
     router.config(app);
-    appController.setup(env.users)
+    appSetup.load(env)
         .then((status) => {
             return status ?
                 console.log(appStatusCode.Success) :

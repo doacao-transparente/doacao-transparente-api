@@ -18,9 +18,10 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "cfenv": "^1.0.x",
-    "restify": "^5.0.1",
+    "cloudant": "^1.8.0",
     "promise": "^7.1.1",
     "request": "^2.81.0",
-    "request-promise": "^4.2.0"
+    "request-promise": "^4.2.0",
+    "restify": "^5.0.1"
   }
 }

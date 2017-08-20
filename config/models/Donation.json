@@ -1,0 +1,9 @@
+{
+    "IdDonation": 4,
+    "value": 1200,
+    "donator": {
+        "idDonator": 2,
+        "donatorName": "gugu",
+        "typedonator": "instituicao comercial"
+    }
+}

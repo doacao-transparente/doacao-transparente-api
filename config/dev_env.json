@@ -64,5 +64,5 @@
         }
     ],
     "cert": "https://blockchain-certs.mybluemix.net/us.blockchain.ibm.com.cert",
-    "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/global"
+    "chaincodePath": "https://github.com/VitorSousaCode/chaincodes/bluehack"
 }

@@ -9,7 +9,7 @@ type NGO struct {
 type Donation struct {
 	IdDonation int     `json:"IdDonation"`
 	Value      float64 `json:"value"`
-	Donator    Donator
+	Donator    Donator `json:"donator"`
 }
 
 type Donator struct {

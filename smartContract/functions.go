@@ -12,7 +12,7 @@ import (
 func (t *SimpleChaincode) createProject(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	//function to create projects [ONG]
 	var projectRequest = args[1]
-	projectToBeRegistered := &Project{}
+	projectToBeRegistered := Project{}
 	fmt.Println("Received create method call with parameters [" + projectRequest + "]")
 	fmt.Println("Unmarshalling Project Data")
 	//deserialize json para project struct
@@ -21,7 +21,7 @@ func (t *SimpleChaincode) createProject(stub shim.ChaincodeStubInterface, args [
 		fmt.Println("Error: invalid project for register")
 		return nil, errors.New("Invalid Project for register")
 	}
-	if projectToBeRegistered == nil || projectToBeRegistered.NGO == nil {
+	if projectToBeRegistered.NGO == nil {
 		fmt.Println("Requests to create project must be performed by an ngo")
 		return nil, errors.New("Requests to create project must be performed by an ngo")
 	}
@@ -38,7 +38,7 @@ func (t *SimpleChaincode) createProject(stub shim.ChaincodeStubInterface, args [
 		fmt.Println("Project: " + projectsList[x].Description)
 	}
 	//Adiciona na lista o projeto da requisicao para a lista de projetos retornados do blockchain
-	projectsList = append(projectsList, projectToBeRegistered)
+	projectsList = append(projectsList, &projectToBeRegistered)
 	//Serializa a lista do projeto, com o projeto da requisicao incluido
 	projectsAsBytes, err2 := json.Marshal(projectsList)
 	if err2 != nil {
@@ -229,8 +229,11 @@ func (t *SimpleChaincode) setValueTransfered(stub shim.ChaincodeStubInterface, a
 
 func (t *SimpleChaincode) getDonationsHistory(stub shim.ChaincodeStubInterface, args string) ([]byte, error) {
 	idProjectHistory := args
-	projectAsByte, err := stub.GetState(idProjectHistory)
 	var projectHistory Project
+	projectAsByte, err := stub.GetState(idProjectHistory)
+	if err == nil {
+		return nil, errors.New("Failed to get projects donations")
+	}
 	err2 := json.Unmarshal(projectAsByte, &projectHistory)
 	if err2 == nil {
 		return nil, errors.New("Failed to retrieve projects list History")
@@ -245,22 +248,27 @@ func (t *SimpleChaincode) getDonationsHistory(stub shim.ChaincodeStubInterface, 
 
 func (t *SimpleChaincode) getDonatorsHistory(stub shim.ChaincodeStubInterface, args string) ([]byte, error) {
 	donatorID := args
-	projectAsByte, err := stub.GetState(projectsKey)
 	var listProject []Project
+	projectAsByte, err := stub.GetState(projectsKey)
+	if err == nil {
+		return nil, errors.New("Failed to get projects donations")
+	}
 	err2 := json.Unmarshal(projectAsByte, &listProject)
 	if err2 == nil {
 		return nil, errors.New("Failed to retrieve projects list project")
 	}
-	var donationsListByDonator []Donation
+
 	donatorIDInt, _ := strconv.Atoi(donatorID)
+	donationsListByDonator := []Donation{}
 	for _, itemPr := range listProject {
 		for _, itemDonation := range itemPr.DonationsHistory {
 			if itemDonation.Donator.IdDonator == donatorIDInt {
-				donationsListByDonator := append(donationsListByDonator, itemDonation)
+
+				donationsListByDonator = append(donationsListByDonator, itemDonation)
 			}
 		}
 	}
-	respondDonationsByDonator, err3 := json.Marshal(donationsListByDonator)
+	respondDonationsByDonator, err3 := json.Marshal(&donationsListByDonator)
 	if err3 == nil {
 		return nil, errors.New("Failed create a json donations")
 	}

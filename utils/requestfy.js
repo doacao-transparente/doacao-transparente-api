@@ -130,9 +130,9 @@ exports.GETDONATIONSHISTORY = (params) => {
     }
 }
 
-exports.GETPROJECTBYID = (params) => {
+exports.GETPROJECTBYID = (id) => {
     console.log('[REQ]GETPROJECTBYID:');
-    console.log(params);
+    console.log(id);
     return {
         method: 'POST',
         url: url + '/chaincode ',
@@ -150,7 +150,7 @@ exports.GETPROJECTBYID = (params) => {
                 },
                 "ctorMsg": {
                     "function": "queryOverKeys",
-                    "args": [params]
+                    "args": [id.toString()]
                 },
                 "secureContext": context.secureContextId
             },
@@ -179,7 +179,7 @@ exports.GETALLPROJECTS = (params) => {
                 },
                 "ctorMsg": {
                     "function": "getProjectsByRange",
-                    "args": [""]
+                    "args": []
                 },
                 "secureContext": context.secureContextId
             },

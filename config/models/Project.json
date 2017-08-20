@@ -1,31 +1,31 @@
 {
-    "NGO": {
-        "idNgo": 0,
-        "NgoName": "International Central of Education"
-    },
-    "CityHall": {
-        "idCityHall": 0,
-        "CityHallName": ""
-    },
     "title": "Save the Plannet",
-    "idProject": "7",
-    "description": "This project is proposed to help the young society with the understanding of the world wide conflicts,so they can make better decisions in respect of the future of the world",
+    "idProject": "28",
     "cost": "350.000.00",
     "status": "draft",
-    "statusHistory": [
+    "description": "This project is proposed to help the young society with the understanding of the world wide conflicts,so they can make better decisions in respect of the future of the world",
+    "valueTransfered": "0.0",
+    "amountCollected": "0.0",
+    "NGO": {
+        "idNgo": "10",
+        "NgoName": "International Central of Education"
+    },
+    "Prefecture": {
+        "idPrefecture": "2",
+        "prefectureName": "Prefecture of Pernambuco"
+    },
+    "StatusHistory": [
         "draft"
     ],
-    "amountCollected": 0,
     "donationsHistory": [
         {
-            "IdDonation": 4,
-            "value": 1200,
+            "IdDonation": 7,
+            "value": 200,
             "donator": {
-                "idDonator": 2,
+                "idDonator": 3,
                 "donatorName": "gugu",
                 "typedonator": "instituicao comercial"
             }
         }
-    ],
-    "valueTransfered": 0
+    ]
 }

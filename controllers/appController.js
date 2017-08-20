@@ -50,7 +50,7 @@ exports.getDonationsHistory = (req, res) => {
 
 exports.getProjectById = (req, res) => {
 
-    rest.getProjectById(req.body)
+    rest.getProjectById(req.params.id)
         .then((success) => {
             console.log("[APPCONTROLLER] getprojectbyid");
             console.log(success);
@@ -64,7 +64,7 @@ exports.getProjectById = (req, res) => {
 
 exports.getAllProjects = (req, res) => {
 
-    rest.getallprojects(req.body)
+    rest.getallprojects()
         .then((success) => {
             console.log("[APPCONTROLLER] getallprojects");
             console.log(success);

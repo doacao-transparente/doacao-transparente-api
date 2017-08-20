@@ -22,8 +22,8 @@ module.exports = function () {
     app.post('/setamount', appController.setAmount);
     app.post('/retrieveproject', appController.query);
     app.post('/saveproject', appController.saveproject);
-    app.post('/getallprojects', appController.getAllProjects);
-    app.post('/getprojectbyid', appController.getProjectById);
+    app.get('/getallprojects', appController.getAllProjects);
+    app.get('/getprojectbyid/:id', appController.getProjectById);
     app.post('/setStatusproject', appController.setStatusProject);
     app.post('/getdonatorhistory', appController.getDonatorHistory);
     app.post('/getDonationsHistory', appController.getDonationsHistory);

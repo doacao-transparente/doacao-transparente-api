@@ -82,10 +82,10 @@ exports.getProjectById = (params) => {
     });
 }
 
-exports.getallprojects = (params) => {
+exports.getallprojects = () => {
     return new Promise((resolve, reject) => {
 
-        let options = requestfy.GETALLPROJECTS(params);
+        let options = requestfy.GETALLPROJECTS();
         request(options)
             .then((success) => {
                 console.log(`[API] getallprojects`);
